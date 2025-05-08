@@ -1,0 +1,106 @@
+The Netlify deploy errored. The relevant error log line information is:
+
+Line 0: build-image version: e9f1401945bcb1e3b1d95f34fade986bb55d03bd (noble)
+Line 1: buildbot version: 2ccfa1b6a3ed7ab36091efe5c4fb3f8ee469f850
+Line 2: Fetching cached dependencies
+Line 3: Failed to fetch cache, continuing with build
+Line 4: Starting to prepare the repo for build
+Line 5: No cached dependencies found. Cloning fresh repo
+Line 6: git clone --filter=blob:none https://github.com/Trossachs/Trossachs-ng
+Line 7: Preparing Git Reference refs/heads/main
+Line 8: Starting to install dependencies
+Line 9: Python version set to 3.13.3
+Line 10: Ruby version set to 2.7.2
+Line 11: [2mmise[0m [34mgo[0m@1.19         install
+Line 12: [2mmise[0m [34mgo[0m@1.19         download go1.19.linux-amd64.tar.gz
+Line 13: [2mmise[0m [34mgo[0m@1.19         checksum go1.19.linux-amd64.tar.gz
+Line 74: [36m[1m❯ Context[22m[39m
+Line 75:   production
+Line 76: [96m[1m​[22m[39m
+Line 77: [96m[1mbuild.command from netlify.toml                               [22m[39m
+Line 78: [96m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 79: ​
+Line 80: [36m$ NODE_OPTIONS=--no-node-snapshot ROLLUP_NATIVE_DISABLE=true npm run build[39m
+Line 81: > rest-express@1.0.0 build
+Line 82: > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+Line 83: /opt/build/repo/node_modules/rollup/dist/native.js:63
+Line 84: 		throw new Error(
+Line 85: 		      ^
+Line 86: Error: Cannot find module @rollup/rollup-linux-x64-gnu. npm has a bug related to optional dependencies (https://github.com/npm/c
+Line 87:     at requireWithFriendlyError [90m(/opt/build/repo/[39mnode_modules/[4mrollup[24m/dist/native.js:63:9[90m)[39m
+Line 88:     at Object.<anonymous> [90m(/opt/build/repo/[39mnode_modules/[4mrollup[24m/dist/native.js:72:76[90m)[39m
+Line 89: [90m    ... 3 lines matching cause stack trace ...[39m
+Line 90: [90m    at Module._load (node:internal/modules/cjs/loader:960:12)[39m
+Line 91: [90m    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:169:29)[39m
+Line 92: [90m    at ModuleJob.run (node:internal/modules/esm/module_job:194:25)[39m {
+Line 93:   [cause]: Error: Cannot find module '@rollup/rollup-linux-x64-gnu'
+Line 94:   Require stack:
+Line 95:   - /opt/build/repo/node_modules/rollup/dist/native.js
+Line 96:   [90m    at Module._resolveFilename (node:internal/modules/cjs/loader:1077:15)[39m
+Line 97:   [90m    at Module._load (node:internal/modules/cjs/loader:922:27)[39m
+Line 98:   [90m    at Module.require (node:internal/modules/cjs/loader:1143:19)[39m
+Line 99:   [90m    at require (node:internal/modules/cjs/helpers:121:18)[39m
+Line 100:       at requireWithFriendlyError [90m(/opt/build/repo/[39mnode_modules/[4mrollup[24m/dist/native.js:45:10[90m)[39m
+Line 101:       at Object.<anonymous> [90m(/opt/build/repo/[39mnode_modules/[4mrollup[24m/dist/native.js:72:76[90m)[39m
+Line 102:   [90m    at Module._compile (node:internal/modules/cjs/loader:1256:14)[39m
+Line 103:   [90m    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)[39m
+Line 104:   [90m    at Module.load (node:internal/modules/cjs/loader:1119:32)[39m
+Line 105:   [90m    at Module._load (node:internal/modules/cjs/loader:960:12)[39m {
+Line 106:     code: [32m'MODULE_NOT_FOUND'[39m,
+Line 107:     requireStack: [ [32m'/opt/build/repo/node_modules/rollup/dist/native.js'[39m ]
+Line 108:   }
+Line 109: }
+Line 110: Node.js v18.17.1
+Line 111: [91m[1m​[22m[39m
+Line 112: [91m[1m"build.command" failed                                        [22m[39m
+Line 113: [91m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 114: ​
+Line 115:   [31m[1mError message[22m[39m
+Line 116:   Command failed with exit code 1: NODE_OPTIONS=--no-node-snapshot ROLLUP_NATIVE_DISABLE=true npm run build
+Line 117: ​
+Line 118:   [31m[1mError location[22m[39m
+Line 119:   In build.command from netlify.toml:
+Line 120:   NODE_OPTIONS=--no-node-snapshot ROLLUP_NATIVE_DISABLE=true npm run build
+Line 121: ​
+Line 122:   [31m[1mResolved config[22m[39m
+Line 123:   build:
+Line 124:     command: NODE_OPTIONS=--no-node-snapshot ROLLUP_NATIVE_DISABLE=true npm run build
+Line 125:     commandOrigin: config
+Line 126:     environment:
+Line 127:       - NODE_VERSION
+Line 128:       - ROLLUP_NATIVE_DISABLE
+Line 129:       - NODE_OPTIONS
+Line 130:       - NPM_FLAGS
+Line 131:     publish: /opt/build/repo/dist
+Line 132:     publishOrigin: config
+Line 133:   functions:
+Line 134:     '*':
+Line 135:       included_files:
+Line 136: Failed during stage 'building site': Build script returned non-zero exit code: 2
+Line 137:         - netlify/functions/**
+        - shared/**
+      node_bundler: esbuild
+  functionsDirectory: /opt/build/repo/netlify/fun
+Line 138: Build failed due to a user error: Build script returned non-zero exit code: 2
+Line 139: Failing build: Failed to build site
+Line 140: Finished processing build request in 26.734s
+
+Netlify has analyzed the error and provided the following guidance:
+
+### Diagnosis
+The build failure is caused by a missing module "@rollup/rollup-linux-x64-gnu" when running Vite build.
+
+The relevant error lines in the log are:
+- [line 83](#L83): Error referencing missing module "@rollup/rollup-linux-x64-gnu".
+- [line 86](#L86): Error details stating the module cannot be found in npm.
+- [line 116](#L116): Build command failed with exit code 1 due to this error.
+
+### Solution
+1. Verify that "@rollup/rollup-linux-x64-gnu" module is present in the `package.json` file or was committed to the repository.
+2. If the module is missing, add it to the project's dependencies by running:
+   ```bash
+   npm install @rollup/rollup-linux-x64-gnu
+   ```
+3. If the module is meant to be an external dependency, ensure it is added to the Vite configuration `build.rollupOptions.external`.
+
+Following these steps should resolve the missing module error and allow the Vite build to run successfully.
